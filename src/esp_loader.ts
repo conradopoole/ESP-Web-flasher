@@ -42,8 +42,6 @@ import { getStubCode } from "./stubs";
 import { pack, sleep, slipEncode, toHex, unpack } from "./util";
 import * as pako from "pako";
 
-//import * as Util from "util";
-
 export class ESPLoader extends EventTarget {
   chipFamily!: ChipFamily;
   chipName: string | null = null;
@@ -575,10 +573,7 @@ export class ESPLoader extends EventTarget {
       }).buffer;
       compressedFilesize = dataToFlash.byteLength;
       this.logger.log(
-        "Writing data with filesize:" +
-          uncompressedFilesize +
-          " Compressed Size:" +
-          compressedFilesize
+        `Writing data with filesize: ${uncompressedFilesize}. Compressed Size: ${compressedFilesize}`
       );
       await this.flashDeflBegin(
         uncompressedFilesize,
@@ -586,7 +581,7 @@ export class ESPLoader extends EventTarget {
         offset
       );
     } else {
-      this.logger.log("\nWriting data with filesize:" + uncompressedFilesize);
+      this.logger.log(`Writing data with filesize: ${uncompressedFilesize}`);
       dataToFlash = binaryData;
       await this.flashBegin(uncompressedFilesize, offset);
     }
