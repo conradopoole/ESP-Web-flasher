@@ -47,7 +47,7 @@ import {
   getUartDateRegAddress,
   DETECTED_FLASH_SIZES,
   CHIP_DETECT_MAGIC_REG_ADDR,
-  CHIP_DETECT_MAGIC_VALUES
+  CHIP_DETECT_MAGIC_VALUES,
 } from "./const";
 import { getStubCode } from "./stubs";
 import { pack, sleep, slipEncode, toHex, unpack } from "./util";
@@ -116,12 +116,12 @@ export class ESPLoader extends EventTarget {
     }
     this.logger.log(`Chip type ${this.chipName}`);
 
-      // if (this._efuses[0] & (1 << 4) || this._efuses[2] & (1 << 16)) {
-      //   this.chipName = "ESP8285";
-      // } else {
-      //   this.chipName = "ESP8266EX";
-      // }
-    
+    // if (this._efuses[0] & (1 << 4) || this._efuses[2] & (1 << 16)) {
+    //   this.chipName = "ESP8285";
+    // } else {
+    //   this.chipName = "ESP8266EX";
+    // }
+
     //this.logger.log("FLASHID");
   }
 
