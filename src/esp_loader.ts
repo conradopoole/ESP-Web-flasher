@@ -980,7 +980,7 @@ export class ESPLoader extends EventTarget {
     let oldSpiUsr = await this.readRegister(SPI_USR_REG);
     let oldSpiUsr2 = await this.readRegister(SPI_USR2_REG);
 
-    var flags = SPI_USR_COMMAND;
+    let flags = SPI_USR_COMMAND;
 
     if (readBits > 0) {
       flags |= SPI_USR_MISO;
