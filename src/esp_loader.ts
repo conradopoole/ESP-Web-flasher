@@ -1006,13 +1006,13 @@ export class ESPLoader extends EventTarget {
 
       this.logger.debug(`Words Length: ${words.length}`);
 
-      words.forEach(async (word) => {
+      for (const word of words) {
         this.logger.debug(
           `Writing word ${toHex(word)} to register offset ${toHex(nextReg)}`
         );
         await this.writeRegister(nextReg, word);
         nextReg += 4;
-      });
+      };
     }
     await this.writeRegister(SPI_CMD_REG, SPI_CMD_USR);
     await this.waitDone(SPI_CMD_REG, SPI_CMD_USR);
