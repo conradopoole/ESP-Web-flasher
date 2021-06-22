@@ -92,7 +92,8 @@ export const SYNC_PACKET = toByteArray(
   "\x07\x07\x12 UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU"
 );
 export const CHIP_DETECT_MAGIC_REG_ADDR = 0x40001000;
-export const CHIP_FAMILY_ESP8266 = 0x8266; // These values for the families are made up nothing that esptool uses.
+// These values for the families are made up; nothing that esptool uses.
+export const CHIP_FAMILY_ESP8266 = 0x8266;
 export const CHIP_FAMILY_ESP32 = 0x32;
 export const CHIP_FAMILY_ESP32S2 = 0x3252;
 export const CHIP_FAMILY_ESP32S3 = 0x3253;
