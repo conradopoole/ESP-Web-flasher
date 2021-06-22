@@ -856,10 +856,7 @@ export class ESPLoader extends EventTarget {
   }
 
   getFlashSizes() {
-    if (
-      this.chipFamily == CHIP_FAMILY_ESP32 ||
-      this._parent?.chipFamily == CHIP_FAMILY_ESP32
-    ) {
+    if (this.getChipFamily() == CHIP_FAMILY_ESP32 ) {
       return ESP32_FLASH_SIZES;
     }
     return FLASH_SIZES;
