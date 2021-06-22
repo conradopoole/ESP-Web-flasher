@@ -988,7 +988,6 @@ export class ESPLoader extends EventTarget {
     if (dataBits > 0) {
       flags |= SPI_USR_MOSI;
     }
-    flags = flags;
 
     await this.setDataLengths(spiAddresses, dataBits, readBits);
 
