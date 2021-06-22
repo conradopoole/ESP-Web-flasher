@@ -856,7 +856,7 @@ export class ESPLoader extends EventTarget {
   }
 
   getFlashSizes() {
-    if (this.getChipFamily() == CHIP_FAMILY_ESP32 ) {
+    if (this.getChipFamily() == CHIP_FAMILY_ESP32) {
       return ESP32_FLASH_SIZES;
     }
     return FLASH_SIZES;
@@ -1012,7 +1012,7 @@ export class ESPLoader extends EventTarget {
         );
         await this.writeRegister(nextReg, word);
         nextReg += 4;
-      };
+      }
     }
     await this.writeRegister(SPI_CMD_REG, SPI_CMD_USR);
     await this.waitDone(SPI_CMD_REG, SPI_CMD_USR);
