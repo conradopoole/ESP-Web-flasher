@@ -6,9 +6,6 @@ import {
   Logger,
   DEFAULT_TIMEOUT,
   ERASE_REGION_TIMEOUT_PER_MB,
-  ESP32S2_DATAREGVALUE,
-  ESP32_DATAREGVALUE,
-  ESP8266_DATAREGVALUE,
   ESP_CHANGE_BAUDRATE,
   ESP_CHECKSUM_MAGIC,
   ESP_FLASH_BEGIN,
@@ -49,6 +46,8 @@ import {
   SpiFlashAddresses,
   getUartDateRegAddress,
   DETECTED_FLASH_SIZES,
+  CHIP_DETECT_MAGIC_REG_ADDR,
+  CHIP_DETECT_MAGIC_VALUES
 } from "./const";
 import { getStubCode } from "./stubs";
 import { pack, sleep, slipEncode, toHex, unpack } from "./util";
@@ -94,17 +93,14 @@ export class ESPLoader extends EventTarget {
     }
     await this.sync();
 
-    // Determine chip family
-    let datareg = await this.readRegister(0x60000078);
-    if (datareg == ESP32_DATAREGVALUE) {
-      this.chipFamily = CHIP_FAMILY_ESP32;
-    } else if (datareg == ESP8266_DATAREGVALUE) {
-      this.chipFamily = CHIP_FAMILY_ESP8266;
-    } else if (datareg == ESP32S2_DATAREGVALUE) {
-      this.chipFamily = CHIP_FAMILY_ESP32S2;
-    } else {
+    // Determine chip family and name
+    let chipMagicValue = await this.readRegister(CHIP_DETECT_MAGIC_REG_ADDR);
+    let chip = CHIP_DETECT_MAGIC_VALUES[chipMagicValue];
+    if (chip === undefined) {
       throw new Error("Unknown Chip.");
     }
+    this.chipName = chip.name;
+    this.chipFamily = chip.family;
 
     // Read the OTP data for this chip and store into this.efuses array
     let baseAddr: number;
@@ -118,22 +114,14 @@ export class ESPLoader extends EventTarget {
     for (let i = 0; i < 4; i++) {
       this._efuses[i] = await this.readRegister(baseAddr! + 4 * i);
     }
+    this.logger.log(`Chip type ${this.chipName}`);
 
-    // The specific name of the chip, e.g. ESP8266EX, to the best
-    // of our ability to determine without a stub bootloader.
-    if (this.chipFamily == CHIP_FAMILY_ESP32) {
-      this.chipName = "ESP32";
-    }
-    if (this.chipFamily == CHIP_FAMILY_ESP32S2) {
-      this.chipName = "ESP32-S2";
-    }
-    if (this.chipFamily == CHIP_FAMILY_ESP8266) {
-      if (this._efuses[0] & (1 << 4) || this._efuses[2] & (1 << 16)) {
-        this.chipName = "ESP8285";
-      } else {
-        this.chipName = "ESP8266EX";
-      }
-    }
+      // if (this._efuses[0] & (1 << 4) || this._efuses[2] & (1 << 16)) {
+      //   this.chipName = "ESP8285";
+      // } else {
+      //   this.chipName = "ESP8266EX";
+      // }
+    
     //this.logger.log("FLASHID");
   }
 
