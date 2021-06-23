@@ -135,16 +135,16 @@ export type ChipFamily =
   | typeof CHIP_FAMILY_ESP32H2;
 
 export const CHIP_DETECT_MAGIC_VALUES = {
-  "0xfff0c101": { name: "ESP8266", family: CHIP_FAMILY_ESP8266 },
-  "-0x000f3eff": { name: "ESP8266", family: CHIP_FAMILY_ESP8266 },
-  "0x00f01d83": { name: "ESP32", family: CHIP_FAMILY_ESP32 },
-  "0x000007c6": { name: "ESP32-S2", family: CHIP_FAMILY_ESP32S2 },
-  "0x00000009": { name: "ESP32-S3", family: CHIP_FAMILY_ESP32S3 },
-  "0xeb004136": { name: "ESP32-S3(beta2)", family: CHIP_FAMILY_ESP32S3 },
-  "0x6921506f": { name: "ESP32-C3", family: CHIP_FAMILY_ESP32C3 },
-  "0x1b31506f": { name: "ESP32-C3", family: CHIP_FAMILY_ESP32C3 },
-  "0xca26cc22": { name: "ESP32-H2", family: CHIP_FAMILY_ESP32H2 },
-  "0x0da1806f": { name: "ESP32-C6(beta)", family: CHIP_FAMILY_ESP32C6 },
+  0xfff0c101: { name: "ESP8266", family: CHIP_FAMILY_ESP8266 },
+  [-999617]: { name: "ESP8266", family: CHIP_FAMILY_ESP8266 },
+  0x00f01d83: { name: "ESP32", family: CHIP_FAMILY_ESP32 },
+  0x000007c6: { name: "ESP32-S2", family: CHIP_FAMILY_ESP32S2 },
+  0x00000009: { name: "ESP32-S3", family: CHIP_FAMILY_ESP32S3 },
+  0xeb004136: { name: "ESP32-S3(beta2)", family: CHIP_FAMILY_ESP32S3 },
+  0x6921506f: { name: "ESP32-C3", family: CHIP_FAMILY_ESP32C3 },
+  0x1b31506f: { name: "ESP32-C3", family: CHIP_FAMILY_ESP32C3 },
+  0xca26cc22: { name: "ESP32-H2", family: CHIP_FAMILY_ESP32H2 },
+  0x0da1806f: { name: "ESP32-C6(beta)", family: CHIP_FAMILY_ESP32C6 },
 };
 
 export const ESP32_DATAREGVALUE = 0x15122500;
