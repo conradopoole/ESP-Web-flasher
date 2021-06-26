@@ -5,7 +5,10 @@ export interface Logger {
   error(msg: string, ...args: any[]): void;
   debug(msg: string, ...args: any[]): void;
 }
-export const baudRates = [921600, 115200, 230400, 460800];
+
+export const baudRates = [
+  115200, 128000, 153600, 230400, 460800, 921600, 1500000, 2000000,
+];
 export const FLASH_SIZES = {
   "512KB": 0x00,
   "256KB": 0x10,
