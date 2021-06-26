@@ -489,7 +489,7 @@ export class ESPLoader extends EventTarget {
     try {
       // SerialPort does not allow to be reconfigured while open so we close and re-open
       // reader.cancel() causes the Promise returned by the read() operation running on
-      // the readLoop to return immediately with { value: undefined, done: true } and thus 
+      // the readLoop to return immediately with { value: undefined, done: true } and thus
       // breaking the loop and exiting readLoop();
       await this._reader?.cancel();
       await this.port.close();
